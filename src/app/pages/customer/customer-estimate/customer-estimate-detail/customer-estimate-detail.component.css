@@ -1,0 +1,58 @@
+.estimate-card {
+  min-height: 720px !important;
+}
+
+.estimate-card ul {
+  padding-left: 0px !important;
+  border-radius: 0px !important;
+  border-bottom: solid 1px !important;
+}
+
+.estimate-card a.nav-link {
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.estimate-card .tab-content .card-header {
+  background-color: gray !important;
+}
+
+.estimate-card .summary-pin {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.estimate-card .service-pin {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.estimate-card .chart-caption {
+  font-size: 16px;
+}
+
+.estimate-card .service-caption {
+  cursor: pointer;
+}
+
+.estimate-card .service-caption:hover {
+  background-color: gray !important;
+}
+
+.estimate-card .trees-tab {
+  height: 624px !important;
+}
+
+.estimate-card .trees-tab .trees-cdk-viewport {
+  height: 624px !important;
+}
+
+.estimate-card .trees-tab .trees-cdk-item {
+  height: 360px;
+}
+
+.estimate-card .estimate-note {
+  font-size: 1.25em;
+  text-indent: 24px;
+}

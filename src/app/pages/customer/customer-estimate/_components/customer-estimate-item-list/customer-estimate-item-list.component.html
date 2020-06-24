@@ -1,0 +1,105 @@
+<div class="card m-0">
+  <div class="card-header p-0">
+    <h2 class="mb-0 text-center">
+      <button class="btn btn-link text-white font-weight-bold caption" type="button" data-toggle="collapse"
+        [attr.data-target]="'#'+type+'collapse'" aria-expanded="true" [attr.aria-controls]="type+'collapse'">
+        {{ title }}
+      </button>
+    </h2>
+  </div>
+
+  <div [id]="type+'collapse'" class="collapse show">
+    <div class="card-body">
+      <ng-container *ngIf="list?.length > 0">
+        <div class="row my-2" style="font-weight: 700; color: darkgreen;">
+          <div class="col d-flex justify-content-start" *ngIf="!isAsset">
+            <span>Category Total: {{ totalAmount | currency }} </span>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <span>{{ totalQuantity | number }} Count</span>
+          </div>
+        </div>
+        <ng-container *ngFor="let item of list; index as i;">
+          <mat-accordion class="example-headers-align">
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span [style.color]="genericColor ? item.color : getPinColor(item.color)" class="mr-2">
+                    <i class="fa fa-circle"></i>
+                  </span>
+                  <span>{{ item.item }}</span>
+                </mat-panel-title>
+                <mat-panel-description class="d-flex justify-content-end">
+                  <span>
+                    {{ item.quantity | number }}
+                  </span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div>
+                <div class="d-flex justify-content-between" style="font-weight: 700;" *ngIf="isOtherService">
+                  <span>
+                    Per Cost: <span class="text-success">{{item.amount | currency}}</span>
+                  </span>
+                  <span>
+                    Total: <span class="text-success">{{item.totalAmount | currency}}</span>
+                  </span>
+                </div>
+                <table mat-table [dataSource]="item.data" class="mat-elevation-z3 w-100 mb-3" *ngIf="!isOtherService">
+                  <ng-container matColumnDef="Common_Name">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <span *ngIf="isAsset">
+                        Service
+                      </span>
+                      <span *ngIf="!isAsset">
+                        Asset
+                      </span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span>
+                        {{element.Common_Name}}
+                      </span>
+                      <span>
+                        {{element.Treatment}}
+                      </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>
+                      <span class="text-success" style="font-weight: 700;">
+                        Totals:
+                      </span>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Amount">
+                    <th mat-header-cell *matHeaderCellDef> Amount </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Amount | currency}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="text-success">
+                      <span>{{item.amount | currency}}</span>
+                      <span>{{item.totalAmount | currency}}</span>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Count">
+                    <th mat-header-cell *matHeaderCellDef> Count </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Count | number}} </td>
+                    <td mat-footer-cell *matFooterCellDef style="font-weight: 700;">
+                      <span class="text-success">
+                        {{ item.quantity | number }}
+                      </span>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="displayedColumns" class="text-success"></tr>
+                </table>
+                <span *ngIf="!isAsset">{{ item.description }}</span>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!list || list.length === 0">
+        <p class="m-0 d-flex align-items-center justify-content-center">
+          No data exists.
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</div>

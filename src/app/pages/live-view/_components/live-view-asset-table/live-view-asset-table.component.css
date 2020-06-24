@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+::ng-deep .asset-table .mat-column-amount {
+  text-align: right !important;
+}
+
+::ng-deep .asset-table .mat-column-count {
+  text-align: right !important;
+}

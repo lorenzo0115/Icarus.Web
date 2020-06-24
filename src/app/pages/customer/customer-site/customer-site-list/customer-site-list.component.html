@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="row">
+          <div class="col-12 col-md-4 pr-1">
+            <app-client-tree-node #treeNode (select)="onSelectClient($event)"></app-client-tree-node>
+          </div>
+          <div class="col-12 col-md-8 pl-1">
+            <div class="card mt-0 mb-0 customer-site-list-card">
+              <div class="card-body">
+                <div class="row">
+                  <form class="col-12" [formGroup]="siteSearchForm">
+                    <div class="row">
+                      <div class="col-5 d-flex justify-content-start align-items-center">
+                        <span class="mr-auto ml-4 font-weight-bold"> Site Count: {{ sites?.length }} </span>
+                        <span class="mr-auto ml-4 font-weight-bold"> Total Assets: {{ totalAssetCount | number }}
+                        </span>
+                      </div>
+                      <div class="col-2 d-flex align-items-center justify-content-center">
+                        <ng-container *ngIf="isLoading">
+                          <img
+                            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        </ng-container>
+                      </div>
+                      <div class="col-5 d-flex justify-content-around align-items-center">
+                        <span class="material-icons"> search </span>
+                        <mat-form-field class="">
+                          <input matInput formControlName="siteName" placeholder="Search by Name" />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <cdk-virtual-scroll-viewport class="site-cdk-viewport" [itemSize]="clientItemSize"
+                  [maxBufferPx]="clientItemMaxBuffPx" [minBufferPx]="clientItemMinBuffPx">
+                  <div *cdkVirtualFor="let site of filteredSites" class="site-cdk-item m-2">
+                    <app-customer-site-card [site]="site"> </app-customer-site-card>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+            </div>
+            <div class="site-map mt-2">
+              <app-customer-site-map [sites]="sites"></app-customer-site-map>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

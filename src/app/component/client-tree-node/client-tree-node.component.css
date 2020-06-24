@@ -1,0 +1,19 @@
+.tree-node.card {
+  max-height: 880px;
+  height: 880px;
+  overflow: auto;
+}
+
+.company-node {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.client-node {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.client-node:hover {
+  background-color: #eeeeee;
+}

@@ -1,0 +1,13 @@
+<div class="img-wrapper" *ngIf="images?.length > 0">
+  <owl-carousel-o [options]="owlOpt" (change)="onChangeImg($event)">
+    <ng-template *ngFor="let img of images" carouselSlide [autoWidth]="true" [id]="img.id">
+      <img class="tree-img" [src]="img.thumbUrl" [alt]="'Tree Image'" [title]="'Tree Image Title'"
+        (click)="onClickImg(img)">
+    </ng-template>
+  </owl-carousel-o>
+  <div *ngIf="note" class="mt-1">
+    <span class="font-weight-bold">Note: </span>
+    <span>...</span>
+    <span class="font-weight-bold float-right" style="cursor: pointer;" (click)="onClickImgNote()"> More </span>
+  </div>
+</div>

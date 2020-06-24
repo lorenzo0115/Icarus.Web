@@ -1,0 +1,74 @@
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black"
+    style="background-image: url('./assets/img/trees.jpg');background-size: cover;background-position: top center;">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+          <div class="card card-login">
+            <div class="card-header card-header-rose text-center">
+              <h4 class="card-title">Log in</h4>
+            </div>
+            <div class="card-body" style="padding-right: 10px !important;">
+              <div class="row">
+                <form class="col-11 mr-auto ml-auto" [formGroup]="loginForm" (submit)="onLogin()">
+                  <div class="row">
+                    <mat-form-field class="col-12 mb-2">
+                      <input matInput type="email" formControlName="email" placeholder="Email *" />
+                      <mat-error class="text-danger" *ngIf="loginForm.get('email').errors?.required">
+                        Enter email.
+                      </mat-error>
+                      <mat-error class="text-danger"
+                        *ngIf="!loginForm.get('email').errors?.required && loginForm.get('email').errors?.email">
+                        Invalid email.
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 mb-2">
+                      <input matInput type="password" formControlName="password" placeholder="Password *" />
+                      <mat-error class="text-danger" *ngIf="loginForm.get('password').errors?.required">
+                        Enter password
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 text-center mb-2">
+                    <button mat-raised-button type="submit" class="btn btn-warning btn-round">
+                      Log In
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <ng-container *ngIf="isPasswordIncorrect">
+                <div class="row mt-2">
+                  <form class="col-11 mr-auto ml-auto" [formGroup]="passwordForm">
+                    <div class="row">
+                      <div class="col-12 text-center mb-2">
+                        <button mat-raised-button type="button" class="btn btn-warning btn-round"
+                          (click)="onResetPassword()">
+                          Reset your password
+                        </button>
+                      </div>
+                      <mat-form-field *ngIf="isResetPassword" class="col-12 mb-2">
+                        <mat-label>Select an option</mat-label>
+                        <mat-select formControlName="opt">
+                          <mat-option value="none">None</mat-option>
+                          <mat-option value="email">Send Me Reset Password Email</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </form>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <span class="f-16-4 text-warning">Don’t have an account?</span>
+          <a class="ml-2 text-warning" style="cursor: pointer;" (click)="onRegister($event)">Sign Up Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

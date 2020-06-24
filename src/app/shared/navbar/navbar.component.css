@@ -1,0 +1,14 @@
+.custom-navbar {
+  color: white !important;
+  background-color: rgb(82, 106, 121) !important;
+}
+
+.min-nav {
+  width: calc(100vw - 80px) !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .custom-navbar {
+    width: 100% !important;
+  }
+}

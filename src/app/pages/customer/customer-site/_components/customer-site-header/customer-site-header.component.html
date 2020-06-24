@@ -1,0 +1,33 @@
+<div class="card mt-1 mb-1 customer-site-header-card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-2 text-left d-flex align-items-center">
+        <span class="material-icons text-warning" style="cursor: pointer;" (click)="onGoBack()">
+          arrow_back_ios
+        </span>
+        <span class="ml-auto mr-auto font-weight-bold"> Tree Count: {{ treeCount || 0 }} </span>
+      </div>
+      <div class="col-8 text-center">
+        <h4 class="card-title">{{ site?.Site }} - ({{ site?.SiteID }})</h4>
+        <p class="card-category">{{ address }}</p>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <a class="nav-link" href="#pablo" id="manager-img-dropdown" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <img class="manager-img" [src]="site?.Account_Manager_Profile_Picture_URL" alt="manager-profile" />
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="manager-img-dropdown">
+          <span class="dropdown-item justify-content-center font-weight-bold"> {{ site?.Account_Manager }} </span>
+          <span class="dropdown-item">
+            <span class="material-icons mr-2"> email </span>
+            {{ site?.Account_Manager_Email }}
+          </span>
+          <span class="dropdown-item">
+            <span class="material-icons mr-2"> phone </span>
+            {{ site?.Account_Manager_Phone_Number | phoneNumber }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

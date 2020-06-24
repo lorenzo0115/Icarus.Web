@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-customer-site-header [site]="site"></app-customer-site-header>
+      </div>
+      <div class="col-12">
+        <div class="card mt-1 mb-0  customer-site-estimate-card">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pills-warning mb-2 pl-0 d-flex flex-nowrap overflow-auto" role="tablist">
+              <ng-container *ngFor="let status of estimateStatus; index as i; first as isFirst">
+                <li class="nav-item">
+                  <a class="nav-link d-flex justify-content-center align-items-center" [class.active]="isFirst"
+                    data-toggle="tab"
+                    href="#{{status?.Estimate_Status === 'In Progress' ? 'in-progress' : status?.Estimate_Status}}"
+                    role="tablist" (click)="onChangeEstimateStatus(status)">
+                    {{ status?.Estimate_Status }} - {{ status?.Estimate_Status_Count }}
+                  </a>
+                </li>
+              </ng-container>
+              <div class="d-flex justify-content-center align-items-center ml-auto">
+                <ng-container *ngIf="isLoading">
+                  <img
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </ng-container>
+              </div>
+            </ul>
+            <div class="tab-content tab-space pt-0">
+              <ng-container *ngFor="let status of estimateStatus; index as i; first as isFirst">
+                <div class="tab-pane"
+                  [id]="status?.Estimate_Status === 'In Progress' ? 'in-progress' : status?.Estimate_Status"
+                  [class.active]="isFirst">
+                  <div class="row">
+                    <cdk-virtual-scroll-viewport class="customer-site-estimate-cdk-viewport"
+                      [itemSize]="estimateItemSize" [maxBufferPx]="estimateItemMaxBuffPx"
+                      [minBufferPx]="estimateItemMinBuffPx">
+                      <div *cdkVirtualFor="let estimate of estimates" class="customer-site-estimate-cdk-item col-12">
+                        <app-customer-site-estimate [estimate]="estimate"></app-customer-site-estimate>
+                      </div>
+                    </cdk-virtual-scroll-viewport>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

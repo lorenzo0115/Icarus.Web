@@ -1,0 +1,39 @@
+.tree-summary ul {
+  padding-left: 0px !important;
+  border-bottom: #c1c1c1 solid 1px !important;
+  border-radius: 0px !important;
+}
+
+.tree-summary .nav-link {
+  border-radius: 15px 15px 0 0;
+}
+
+.tree-species ul {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.tree-species .nav-link {
+  border-radius: 3px 3px 3px 3px;
+}
+
+.tree-color-span {
+  width: 5px;
+  height: 100%;
+}
+
+.species-item {
+  cursor: pointer !important;
+}
+
+.species-item:hover {
+  background-color: #eeeeee !important;
+}
+
+.clear-btn {
+  position: absolute !important;
+  z-index: 999 !important;
+  top: 64px !important;
+  right: 16px !important;
+  background-color: rgba(233, 30, 99, 0.7) !important;
+}

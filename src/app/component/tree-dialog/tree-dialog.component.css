@@ -1,0 +1,8 @@
+.tree-dialog ul {
+  border-bottom: solid 1px gray;
+  border-radius: 0px !important;
+}
+
+.tree-dialog ul a {
+  border-radius: 8px 8px 0px 0px !important;
+}

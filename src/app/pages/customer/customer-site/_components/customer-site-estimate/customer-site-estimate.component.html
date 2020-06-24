@@ -1,0 +1,32 @@
+<div class="card mt-1 mb-1 customer-site-estimate-card">
+  <div class="card-header text-center">
+    <h4 class="card-title">{{ estimate.Name }}</h4>
+    <p class="card-category">{{ estimate.Company }}</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-3 d-flex justify-content-center">
+        <p class="detail-caption">Client:</p>
+        <p class="detail-content">{{ estimate.Client_Name }}</p>
+      </div>
+      <div class="col-3 d-flex justify-content-center">
+        <p class="detail-caption">Site:</p>
+        <p class="detail-content">{{ estimate.Site }}</p>
+      </div>
+      <div class="col-3 d-flex justify-content-center">
+        <p class="detail-caption">Status:</p>
+        <p class="detail-content text-uppercase">{{ estimate.Estimate_Status }}</p>
+      </div>
+      <div class="col-3 d-flex justify-content-center">
+        <p class="detail-caption">Status Date:</p>
+        <p class="detail-content text-uppercase">{{ estimate?.Estimate_Status_Date }}</p>
+      </div>
+      <div class="col-12 btn-col">
+        <button mat-raised-button class="btn btn-warning btn-round ml-2 mr-2" (click)="onView()">
+          View
+          <i class="material-icons">double_arrow</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

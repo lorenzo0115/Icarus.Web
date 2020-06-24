@@ -1,0 +1,53 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="card mt-0 mb-0">
+          <div class="card-body">
+            <div class="row">
+              <form class="col-12" [formGroup]="searchForm">
+                <div class="row mb-2 d-flex justify-content-end align-items-center">
+                  <span class="material-icons"> search </span>
+                  <mat-form-field class="col-12 col-md-3">
+                    <input matInput placeholder="Search" formControlName="key" />
+                  </mat-form-field>
+                </div>
+              </form>
+            </div>
+            <ul class="nav nav-pills nav-pills-warning pl-0 d-flex flex-nowrap overflow-auto align-items-center"
+              style="margin-bottom: 10px;" role="tablist">
+              <ng-container *ngFor="let status of estStatuses; index as i; first as isFirst">
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#customer-estimate-list{{ i + 1 }}" role="tablist"
+                    [class.active]="isFirst" (click)="onChangeStatus(status)">
+                    {{ status.Estimate_Status }} - {{ status.Estimate_Status_Count | number }}
+                  </a>
+                </li>
+              </ng-container>
+              <span class="ml-auto mr-2 font-weight-bold"> Estimate Count: {{ totalCount | number }} </span>
+              <ng-container *ngIf="isLoading">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
+              </ng-container>
+            </ul>
+            <div class="tab-content tab-space pt-0">
+              <ng-container *ngFor="let status of estStatuses; index as i; first as isFirst">
+                <div class="tab-pane" id="customer-estimate-list{{ i + 1 }}" [class.active]="isFirst">
+                  <cdk-virtual-scroll-viewport [style.height.px]="664" [itemSize]="estCdkItemSize"
+                    [maxBufferPx]="estCdkItemMaxBuffPx" [minBufferPx]="estCdkItemMinBuffPx">
+                    <div *cdkVirtualFor="let estimate of filteredEstimates" class="mr-2 ml-2"
+                      [style.height.px]="isMobile ? 520 : estimateItemSize">
+                      <app-customer-estimate-card [estimate]="estimate"> </app-customer-estimate-card>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

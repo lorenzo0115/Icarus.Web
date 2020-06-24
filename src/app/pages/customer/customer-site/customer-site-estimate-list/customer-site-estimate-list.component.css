@@ -1,0 +1,18 @@
+.customer-site-estimate-card ul.nav {
+  min-height: 44px !important;
+  border-bottom: #c1c1c1 solid 1px;
+  border-radius: 0px !important;
+}
+
+.customer-site-estimate-card ul a.nav-link {
+  border-radius: 15px 15px 0px 0px !important;
+}
+
+.customer-site-estimate-cdk-viewport {
+  height: 675px;
+  width: 100%;
+}
+
+.customer-site-estimate-cdk-item {
+  height: 256px;
+}

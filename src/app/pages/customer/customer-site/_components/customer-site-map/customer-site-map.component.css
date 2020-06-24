@@ -1,0 +1,12 @@
+.customer-site-map {
+  height: 100%;
+}
+
+.customer-site-map-txt {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+::ng-deep .customer-site-map .gm-style .gm-style-iw-c {
+  width: 200px !important;
+}

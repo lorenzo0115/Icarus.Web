@@ -1,0 +1,71 @@
+.tree-filter-card {
+  height: 780px;
+  max-height: 780px;
+}
+
+.tree-filter-card p {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.site-trees-list-viewport {
+  height: 700px;
+  width: 100%;
+}
+
+.site-trees-item {
+  height: 488px;
+}
+
+.asset-list ul.nav {
+  border-bottom: #c1c1c1 solid 1px;
+}
+
+.asset-list ul span {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.asset-list .tab-content {
+  height: 700px;
+  max-height: 700px;
+}
+
+.asset-list .nav-pills {
+  border-radius: 0px !important;
+}
+
+.asset-list li a {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.nav-link {
+  border-radius: 15px 15px 0px 0px !important;
+}
+
+.stats-tab ul {
+  border-bottom: none !important;
+  border-right: solid 1px !important;
+}
+
+.stats-tab ul a {
+  border-radius: 0 0 0 0 !important;
+}
+
+/* begin estimates tab */
+.estimates-tab a {
+  border-radius: 15px 0 0 15px !important;
+}
+
+.site-estimate-list-viewport {
+  height: 700px;
+  width: 100%;
+}
+
+::ng-deep .tree-tab-tooltip {
+  background-color: rgba(255, 153, 0, 0.7);
+  color: white !important;
+  font-size: 20px !important;
+  border-radius: 10px !important;
+}

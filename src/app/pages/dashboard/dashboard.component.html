@@ -1,0 +1,37 @@
+<div class="main-content" style="font-size:x-large">
+  <div class="container-fluid">
+    <div *ngIf="isCompanyUser" class="row pt-5">
+      <div class="col-12 text-center">
+        <h1>Coming Soon</h1>
+        <p style="color: rgb(124, 124, 124);">
+          If you made it here, the app is not ready.
+          <br>
+          <br>
+          The pages will not work yet, please use the link to go to the alpha version:
+        </p>
+      </div>
+      <div class="col-4 ml-auto mr-auto mt-4">
+        <a class="btn btn-lg w-100 btn-info" style="cursor: pointer;"
+          href="https://sparrowassetmanager.azurewebsites.net/">
+          Alpha Version
+        </a>
+      </div>
+    </div>
+    <div *ngIf="!isCompanyUser">
+      <div class="col-12 text-center">
+        <span class="coming text-center" style="font-size: large;">
+          Current Estimate Summary
+        </span>
+      </div>
+      <div *ngIf="companies">
+        <div *ngFor="let company of companies"  class="mt-4">
+          <h2 class="text-center">
+            <img src={{company.Logo_URL}} style="width: 50px;">
+            <span>{{company.Company}}</span>
+          </h2>
+          <app-current-estimate-summary [companyId]="company.Company_ID"></app-current-estimate-summary>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-4">
+        <div class="card mt-0 mb-0 company-site-list">
+          <div class="card-header pb-0">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-between align-items-center">
+                <span>Site Count : <span>{{ sites?.length || 0 }}</span> </span>
+                <span>Total Assets : <span>{{ totalAssets }}</span></span>
+                <button mat-raised-button class="btn btn-warning btn-round btn-fab" (click)="onAddSite()">
+                  <i class="material-icons">add</i>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <form class="col-12" [formGroup]="siteSearchForm">
+                <div class="row">
+                  <mat-form-field class="col-12 col-sm-4 pr-1">
+                    <mat-label>Sort</mat-label>
+                    <mat-select formControlName="category">
+                      <mat-option *ngFor="let opt of siteSearchOpts" [value]="opt.value">
+                        {{opt.label}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="siteSearchForm.get('category').hasError('required')">
+                      Select Search Option.
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-12 col-sm-8 pl-1">
+                    <input matInput type="text" formControlName="value" placeholder="Search">
+                  </mat-form-field>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-body pt-0">
+            <div class="row">
+              <cdk-virtual-scroll-viewport class="site-cdk-viewport" [itemSize]="siteCdkItemSize"
+                [maxBufferPx]="siteCdkMaxBuffPx" [minBufferPx]="siteCdkMinBuffPx">
+                <div *cdkVirtualFor="let site of filteredSites; index as i;" class="site-cdk-item m-1">
+                  <app-company-site-card [site]="site"></app-company-site-card>
+                </div>
+              </cdk-virtual-scroll-viewport>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-8">
+        <app-company-site-map [sites]="sites"></app-company-site-map>
+      </div>
+    </div>
+  </div>
+</div>

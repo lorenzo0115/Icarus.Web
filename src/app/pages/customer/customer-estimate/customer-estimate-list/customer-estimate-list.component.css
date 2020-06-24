@@ -1,0 +1,9 @@
+.card ul.nav {
+  min-height: 44px;
+  border-radius: 0 !important;
+  border-bottom: #908888 solid 1px;
+}
+
+.card ul li a.nav-link {
+  border-radius: 15px 15px 0px 0px !important;
+}

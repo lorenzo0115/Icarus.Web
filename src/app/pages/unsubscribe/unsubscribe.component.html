@@ -1,0 +1,44 @@
+<div class="main-content p-5">
+  <div class="container-fluid text-center">
+    <h1>
+      <img src="/assets/img/logo.png" style="width: 100px;"/>
+      <br/>
+      <a href="/login" style="color:green !important; font-weight:400">
+        Sparrow
+      </a>
+      <p style="font-size: small;" class="m-0 p-0" >
+          Asset Managmenet Software
+      </p>
+    </h1>
+    <p style="font-size: large;">
+      <span>
+        Unsubscribe from ALL e-mails from us, by submitting your e-mail address.
+        <br>
+        <b>
+          You will stop receiving e-mails immediately.
+        </b>
+      </span>
+    </p>
+    <div class="row pt-5 mt-5">
+      <form [formGroup]="unsubscribeForm" class="col-12">
+        <div class="row">
+          <mat-form-field class="col-12 col-sm-4 ml-auto mr-auto">
+            <input matInput type="text" formControlName="email" placeholder="Email *">
+            <mat-error *ngIf="unsubscribeForm.get('email').hasError('required')">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="unsubscribeForm.get('email').hasError('email')">
+              Enter a valid email.
+            </mat-error>
+          </mat-form-field>
+          <div class="col-12 text-center mt-2">
+            <button type="button" class="btn btn-warning btn-round" (click)="onUnsubscribe()">
+              <i class="material-icons">unsubscribe</i>
+              Unsubscribe
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

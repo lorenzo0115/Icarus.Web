@@ -1,0 +1,10 @@
+table {
+  width: 100% !important;
+}
+
+::ng-deep th.mat-column-index,
+th.mat-column-name {
+  /* text-align: center !important; */
+  font-weight: bold !important;
+  color: black !important;
+}

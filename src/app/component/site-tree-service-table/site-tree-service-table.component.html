@@ -1,0 +1,32 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="treatment">
+      <th mat-header-cell *matHeaderCellDef> Treatment </th>
+      <td mat-cell *matCellDef="let element" [matTooltip]="element.description" matTooltipPosition="above">
+        {{ element.treatment }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estimate">
+      <th mat-header-cell *matHeaderCellDef> Estimate Code </th>
+      <td mat-cell *matCellDef="let element">
+        <a class="text-warning" style="cursor: pointer;" (click)="onViewEstimate($event, element)">
+          <u> {{ element.estimateCode }} </u>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator [pageIndex]="pageIndex" [pageSize]="paginationSize" [pageSizeOptions]="paginationOpts"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

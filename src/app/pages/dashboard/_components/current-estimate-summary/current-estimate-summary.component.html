@@ -1,0 +1,50 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="EstimateCode">
+      <th mat-header-cell *matHeaderCellDef> Estimate Code </th>
+      <td mat-cell *matCellDef="let element" [routerLink]="companies">
+        <a style="cursor: pointer;" (click)="onGoToEstimate($event, element)">
+          <span class="text-warning">
+            <u> {{element.EstimateCode}} </u>
+          </span>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Amount">
+      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <td mat-cell *matCellDef="let element"> {{element.Grand_Total | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Site">
+      <th mat-header-cell *matHeaderCellDef> Site </th>
+      <td mat-cell *matCellDef="let element">
+        <a style="cursor: pointer;" (click)="onGoToSite($event, element)">
+          <span *ngIf="element.SiteID" class="text-warning">
+            <u> ({{ element.SiteID }}) </u>
+          </span>
+          <span>
+            {{element.Site}}
+          </span>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.Estimate_Status}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+</div>

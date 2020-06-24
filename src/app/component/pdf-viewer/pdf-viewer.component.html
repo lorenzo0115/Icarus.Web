@@ -1,0 +1,17 @@
+<div class="row bg-white pdf-wrapper">
+  <div class="col-12 mt-2 d-flex justify-content-around">
+    <button mat-raised-button class="btn btn-warning btn-round" type="button" (click)="onDownloadPdf()"
+      [disabled]="!isPdfLoaded">
+      Download
+    </button>
+    <button mat-raised-button class="btn btn-warning btn-round" type="button" (click)="onPrintPdf()"
+      [disabled]="!isPdfLoaded">
+      Print
+    </button>
+  </div>
+
+  <div class="col-12 mt-2 mb-4">
+    <pdf-viewer #pdfPreview [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [render-text]="true"
+      (after-load-complete)="onInitPdfView($event)" (error)="onLoadError()" style="display: block;"></pdf-viewer>
+  </div>
+</div>

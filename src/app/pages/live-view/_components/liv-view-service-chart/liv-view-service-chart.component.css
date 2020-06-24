@@ -1,0 +1,17 @@
+.service-chart .card-header {
+  background-color: gray !important;
+}
+
+.service-chart .card-header button {
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+.service-chart .description {
+  text-indent: 24px !important;
+}
+
+.service-chart .description span {
+  color: black !important;
+}

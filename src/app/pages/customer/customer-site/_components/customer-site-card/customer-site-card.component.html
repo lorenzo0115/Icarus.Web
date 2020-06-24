@@ -1,0 +1,99 @@
+<p>customer-site-card works!</p>
+<div class="card mt-0 customer-site-card" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <div class="card-header pb-0">
+    <h4 class="card-title">
+      {{ site?.Site }} ({{ site?.SiteID }})
+      <span class="ml-2" style="cursor: pointer;" matTooltip="Locate Site on Map" matTooltipPosition="above"
+        (click)="onSpecifySite()">
+        <i class="fal fa-map-marker-alt text-info"></i>
+      </span>
+    </h4>
+    <p class="card-category">{{ site?.Street }}</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <img class="profile-img" [src]="site.Account_Manager_Profile_Picture_URL" alt="profile-img" />
+        <p class="manager-name"> {{ site?.Account_Manager }} </p>
+        <p class="text-muted mb-1"> {{ site?.Company }} </p>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="row">
+          <div class="col-12 tab-group">
+            <ul class="nav nav-pills nav-pills-warning mb-2 pl-0 pr-0" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#asset-tab-{{ site?.Site_ID }}" role="tablist">
+                  Assets
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#estimate-tab-{{ site?.Site_ID }}" role="tablist">
+                  Estimates
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content tab-space">
+              <div class="tab-pane active" id="asset-tab-{{ site.Site_ID }}">
+                <div class="row">
+                  <div class="col-12 text-left">
+                    <p class="asset-count">Assets - {{ site?.Asset_Count }}</p>
+                  </div>
+                  <div class="col-12">
+                    <button mat-raised-button class="btn btn-warning btn-round ml-2 mr-2" (click)="onViewAsset()">
+                      <i class="material-icons">double_arrow</i>
+                      View
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="estimate-tab-{{ site.Site_ID }}">
+                <div class="row">
+                  <div class="col-12">
+                    <mat-grid-list [cols]="4" rowHeight="22px" class="text-dark">
+                      <mat-grid-tile [matTooltip]="'Pending Estimates'">
+                        <span class="ml-1">
+                          <i class="far fa-running"></i> - {{ site?.Pending_Approval }}
+                        </span>
+                      </mat-grid-tile>
+                      <mat-grid-tile [matTooltip]="'Approved Estimates'">
+                        <span class="ml-1">
+                          <i class="far fa-thumbs-up"></i> - {{ site?.Approved }}
+                        </span>
+                      </mat-grid-tile>
+                      <mat-grid-tile [matTooltip]="'Scheduled Estimates'">
+                        <span class="ml-1">
+                          <i class="far fa-clock"></i> - {{ site?.Scheduled }}
+                        </span>
+                      </mat-grid-tile>
+                      <mat-grid-tile [matTooltip]="'In Progress Estimates'">
+                        <span class="ml-1">
+                          <i class="fas fa-spinner"></i> - {{ site?.In_Progress }}
+                        </span>
+                      </mat-grid-tile>
+                      <mat-grid-tile [matTooltip]="'Completed Estimates'">
+                        <span class="ml-1">
+                          <i class="fas fa-list-ul"></i> - {{ site?.Completed }}
+                        </span>
+                      </mat-grid-tile>
+                      <mat-grid-tile [matTooltip]="'Total Estimates'">
+                        <span class="ml-1">
+                          <i class="far fa-sort-amount-down-alt"></i> - {{ site?.Estimate_Count }}
+                        </span>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <button mat-raised-button class="btn btn-warning btn-round ml-2" (click)="onViewEstimate()">
+                      <i class="material-icons">double_arrow</i>
+                      View
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+.img-color {
+  height: 8px !important;
+  width: 120px !important;
+}
+
+.img-wrapper {
+  -webkit-box-shadow: -1px -1px 48px -8px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: -1px -1px 48px -8px rgba(0, 0, 0, 0.46);
+  box-shadow: -1px -1px 48px -8px rgba(0, 0, 0, 0.46);
+}
+
+.tree-img-note,
+.tree-img-note-btn {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tree-note,
+.tree-note-btn {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tree-card-tab ul {
+  border-radius: 0px;
+  border-bottom: #c1c1c1 solid 1px;
+}
+
+.tree-card-tab a {
+  border-radius: 10px 10px 0 0;
+}
+
+.tree-locate-btn {
+  cursor: pointer;
+}
+
+.estimate-fields {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.bb-1 {
+  border-bottom: black solid 1px;
+}
+
+.estimate-fields span {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.tree-note-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 320px;
+}
+
+::ng-deep .ng-image-slider-container .main {
+  display: flex !important;
+  justify-content: center !important;
+}

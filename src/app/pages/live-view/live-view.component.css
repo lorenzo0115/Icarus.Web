@@ -1,0 +1,27 @@
+.live-view-card {
+  min-height: 800px !important;
+}
+
+.live-view-card ul {
+  padding-left: 0px !important;
+  border-radius: 0px !important;
+  border-bottom: solid 1px !important;
+}
+
+.live-view-card ul li a {
+  border-radius: 15px 15px 0px 0px !important;
+}
+
+.live-view-card .tree-tab {
+  min-height: 700px !important;
+}
+
+.live-view-card .tree-tab .asset-list-viewport {
+  height: 700px !important;
+  width: 100% !important;
+}
+
+.live-view-card .tree-tab .asset-item {
+  height: 360px !important;
+  width: 100% !important;
+}

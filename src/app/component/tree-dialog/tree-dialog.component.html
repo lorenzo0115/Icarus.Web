@@ -1,0 +1,150 @@
+<div class="modal fade tree-dialog" id="tree-dialog" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-auto">
+              <div class="mb-4" style="height: 60px;">
+                <span *ngIf="tree?.Completed" class="font-weight-bold text-success text-uppercase">Completed</span>
+                <span *ngIf="!tree?.Completed" class="font-weight-bold text-warning text-uppercase">Pending</span>
+              </div>
+              <app-tree-img-slide [images]="images" [tree]="tree" (clickImg)="onShowFullImg($event)">
+              </app-tree-img-slide>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col-12">
+                <span class="float-left" style="font-size: 18px; font-weight: 400;">
+                  {{ tree?.Common_Name }} - ({{ tree?.AssetID }})
+                </span>
+                <span class="ml-2 tree-locate-btn" matTooltip="Locate tree on map" matTooltipPosition="above"
+                  matTooltipClass="tree-card-tooltip">
+                  <i class="fal fa-map-marker-alt text-info"></i>
+                </span>
+                <span class="float-right" style="font-size: 18px; font-weight: 400;">{{ tree?.Botanical_Name }}</span>
+              </div>
+              <div class="col-12 text-center">
+                <p class="w-100" style="height: 4px;" [style.background-color]="tree?.Color"></p>
+              </div>
+              <div class="col-12">
+                <mat-grid-list [cols]="5" rowHeight="22px" class="text-dark">
+                  <mat-grid-tile matTooltipPosition="above" [matTooltip]="'Diameter Breast Height'">
+                    <span>
+                      {{ tree?.Diameter_Breast_Height }}
+                    </span>
+                    <span class="ml-1">
+                      <i class="fa fa-ruler-triangle"></i>
+                    </span>
+                  </mat-grid-tile>
+                  <mat-grid-tile matTooltipPosition="above" [matTooltip]="tree?.Near_Powerline_Description">
+                    <span [class.text-warning]="tree?.Near_Powerline">
+                      <span>
+                        <i class="fa fa-bolt"></i>
+                      </span>
+                    </span>
+                  </mat-grid-tile>
+                  <mat-grid-tile matTooltipPosition="above" [matTooltip]="tree?.Near_Building_Description">
+                    <span [class.text-warning]="tree?.Near_Building">
+                      <span>
+                        <i class="fa fa-building"></i>
+                      </span>
+                    </span>
+                  </mat-grid-tile>
+                  <mat-grid-tile matTooltipPosition="above" [matTooltip]="tree?.Hardscape_Damage">
+                    <span [class.text-warning]="tree?.HardscapeDamageTypeID === 3"
+                      [class.text-danger]="tree?.HardscapeDamageTypeID === 2">
+                      <span>
+                        <i class="fa fa-road"></i>
+                      </span>
+                    </span>
+                  </mat-grid-tile>
+                  <mat-grid-tile matTooltipPosition="above" [matTooltip]="'Tree Rating'">
+                    <span class="mr-1">
+                      <i class="fa fa-star"></i>
+                    </span>
+                    <span>
+                      {{ tree?.Tree_Rating }}
+                    </span>
+                  </mat-grid-tile>
+                </mat-grid-list>
+              </div>
+              <ng-container *ngIf="tree?.Asset_ID && category === 'estimate'">
+                <div class="col-12 mt-3 tree-card-tab">
+                  <ul class="nav nav-pills nav-pills-warning pl-0" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link pt-1 pb-1 active" data-toggle="tab" href="#tree-service-{{ tree?.Asset_ID }}"
+                        role="tablist">
+                        Services ({{ tree?.Services?.length || 0 }})
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content tab-space pt-2">
+                    <div class="tab-pane active" id="tree-service-{{ tree?.Asset_ID }}">
+                      <div class="row">
+                        <div class="col-12">
+                          <app-tree-services-table [services]="tree?.Services"></app-tree-services-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="tree?.Asset_ID && category === 'site'">
+                <div class="col-12 mt-3 tree-card-tab">
+                  <ul class="nav nav-pills nav-pills-warning pl-0" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link pt-1 pb-1 active" data-toggle="tab"
+                        href="#recommended-service-{{ tree?.Asset_ID }}" role="tablist">
+                        Recommended ({{ tree?.Recommended_Services?.length }})
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link pt-1 pb-1" data-toggle="tab" href="#pending-service-{{ tree?.Asset_ID }}"
+                        role="tablist">
+                        Pending ({{ tree?.Pending_Services?.length }})
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link pt-1 pb-1" data-toggle="tab" href="#service-history-{{ tree?.Asset_ID }}"
+                        role="tablist">
+                        History ({{ tree?.Service_History?.length }})
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content tab-space pt-2">
+                    <div class="tab-pane active" id="recommended-service-{{ tree?.Asset_ID }}">
+                      <div class="row">
+                        <div class="col-12">
+                          <app-site-tree-service-table [services]="tree?.Recommended_Services">
+                          </app-site-tree-service-table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="pending-service-{{ tree?.Asset_ID }}">
+                      <div class="row">
+                        <div class="col-12">
+                          <app-site-tree-service-table [services]="tree?.Pending_Services">
+                          </app-site-tree-service-table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="service-history-{{ tree?.Asset_ID }}">
+                      <div class="row">
+                        <div class="col-12">
+                          <app-site-tree-service-table [services]="tree?.Service_History"></app-site-tree-service-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button type="button" class="btn btn-warning btn-round" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.img-wrapper {
+  width: 100px !important;
+  height: 130px !important;
+  -webkit-box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.75);
+}
+
+.tree-img {
+  width: 100px !important;
+  height: 130px !important;
+  cursor: pointer;
+}
+
+.img-note,
+.img-note-btn {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.img-note-content {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

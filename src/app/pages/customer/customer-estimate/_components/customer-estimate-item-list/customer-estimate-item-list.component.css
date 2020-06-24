@@ -1,0 +1,21 @@
+.card-header {
+  background-color: gray !important;
+}
+
+.caption {
+  font-size: 16px;
+}
+
+.list-item {
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: #e3e1df !important;
+}
+
+.color-pin {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+}

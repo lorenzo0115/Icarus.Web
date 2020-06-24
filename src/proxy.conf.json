@@ -1,0 +1,8 @@
+{
+  "/sparrow/*": {
+    "target": "https://mytikas.blob.core.windows.net",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

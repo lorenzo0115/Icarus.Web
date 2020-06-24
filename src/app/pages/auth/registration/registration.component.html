@@ -1,0 +1,104 @@
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black"
+    style="background-image: url('./assets/img/trees.jpg');background-size: cover;background-position: top center;">
+    <div class="container">
+      <ng-container *ngIf="isLoaded">
+        <div *ngIf="isConfirmed" class="row" style="margin-top: -160px;">
+          <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <span class="font-weight-bold" style="font-size: 20px;">
+                      E-mail is already registered. You can login now.
+                    </span>
+                    <br />
+                    <button mat-raised-button type="button" class="btn btn-warning btn-round mt-4" (click)="onLogin()">
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isConfirmed" class="row" style="margin-top: -160px;">
+          <ng-container *ngIf="!isCompleted">
+            <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+              <div class="card card-login">
+                <div class="card-header card-header-rose text-center">
+                  <h4 class="card-title">Complete Registration</h4>
+                </div>
+                <div class="card-body" style="padding-right: 10px !important;">
+                  <div class="row">
+                    <form [formGroup]="passwordForm" class="col-12" (submit)="onCompleteRegistration($event)">
+                      <div class="row">
+                        <mat-form-field class="col-12 mb-2">
+                          <input matInput [type]="isHidePassword ? 'password' : 'text'" formControlName="password"
+                            placeholder="Password *" />
+                          <button mat-icon-button matSuffix type="button" (click)="isHidePassword = !isHidePassword"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidePassword">
+                            <mat-icon>
+                              {{ isHidePassword ? "visibility_off" : "visibility" }}
+                            </mat-icon>
+                          </button>
+                          <mat-error *ngIf="passwordForm.get('password').hasError('required')">
+                            Password is required.
+                          </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="col-12 mb-2">
+                          <input matInput [type]="isHideConfirmPassword ? 'password' : 'text'"
+                            formControlName="confirmPassword" placeholder="Confirm Password *" />
+                          <button mat-icon-button matSuffix type="button"
+                            (click)="isHideConfirmPassword = !isHideConfirmPassword" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="isHideConfirmPassword">
+                            <mat-icon>
+                              {{ isHideConfirmPassword ? "visibility_off" : "visibility" }}
+                            </mat-icon>
+                          </button>
+                          <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('required')">
+                            Confirm Password is required.
+                          </mat-error>
+                          <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('ConfirmPassword')">
+                            Password does not match.
+                          </mat-error>
+                        </mat-form-field>
+                        <div class="col-12 text-center mt-1 mb-3">
+                          <button mat-raised-button type="submit" class="btn btn-warning btn-round">
+                            Complete Registration
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isCompleted">
+            <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <span class="font-weight-bold" style="font-size: 20px;">
+                        E-mail is registered.
+                      </span>
+                      <br />
+                      <span class="font-weight-bold" style="font-size: 20px;"> You can login now. </span>
+                      <br />
+                      <button mat-raised-button type="button" class="btn btn-warning btn-round mt-4"
+                        (click)="onLogin()">
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

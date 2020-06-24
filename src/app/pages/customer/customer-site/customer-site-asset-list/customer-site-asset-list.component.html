@@ -1,0 +1,181 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row main-section">
+      <div class="col-12">
+        <app-customer-site-header [site]="site" [treeCount]="trees?.length"></app-customer-site-header>
+      </div>
+      <div class="col-3 pr-1">
+        <div class="card mt-1 mb-0 overflow-auto tree-filter-card">
+          <div class="card-body">
+            <app-tree-filter *ngIf="trees && site" [Original_Records]="trees" [Site_ID]="site?.Site_ID"
+              (Emitter_Trees)="onChangeFilters($event)"
+              >
+            </app-tree-filter>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 pl-1">
+        <div class="card mt-1 mb-0 asset-list">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pills-warning mb-2 pl-0 d-flex flex-nowrap overflow-auto" id="site-asset-tab"
+              role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active d-flex justify-content-center align-items-center" data-toggle="tab"
+                  href="#site-asset-map-tab" role="tablist">
+                  Map
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex justify-content-center align-items-center" data-toggle="tab"
+                  href="#site-asset-trees-tab" role="tablist" matTooltip="Back to Previous Tab"
+                  #treeTabTooltip="matTooltip" matTooltipPosition="above" matTooltipClass="tree-tab-tooltip"
+                  (mouseenter)="$event.stopImmediatePropagation()" (mouseleave)="$event.stopImmediatePropagation()">
+                  Trees
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex justify-content-center align-items-center" data-toggle="tab"
+                  href="#site-asset-stats-tab" role="tablist">
+                  Stats
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex justify-content-center align-items-center" data-toggle="tab"
+                  href="#site-asset-estimates-tab" role="tablist">
+                  Estimates
+                </a>
+              </li>
+              <div class="d-flex justify-content-center align-items-center ml-auto">
+                <ng-container *ngIf="isLoading">
+                  <img
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </ng-container>
+              </div>
+            </ul>
+            <div class="tab-content tab-space pt-0">
+              <div class="tab-pane active h-100" id="site-asset-map-tab">
+                <app-tree-map #treeMap [trees]="filteredTrees" [lat]="site?.Latitude" [lng]="site?.Longitude"
+                  [isHoverEnable]="false" (previewImg)="onViewFullImg($event)">
+                </app-tree-map>
+              </div>
+              <div class="tab-pane" id="site-asset-trees-tab">
+                <cdk-virtual-scroll-viewport class="site-trees-list-viewport" [itemSize]="treeItemSize"
+                  [maxBufferPx]="treeItemMaxBufferPx" [minBufferPx]="treeItemMinBufferPx">
+                  <div *cdkVirtualFor="let tree of filteredTrees" class="site-trees-item col-12">
+                    <app-tree-card [tree]="tree" [category]="'site'" (previewImg)="onViewFullImg($event)"
+                      (locate)="onLocateTreeInMap($event)">
+                    </app-tree-card>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+              <div class="tab-pane stats-tab" id="site-asset-stats-tab">
+                <div class="row">
+                  <div class="col-md-4">
+                    <ul class="nav nav-pills nav-pills-rose flex-column h-100 p-0" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#species-chart-tab" role="tablist">
+                          Species
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#diameter-chart-tab" role="tablist">
+                          Diameter Breast Height
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#rating-chart-tab" role="tablist">
+                          Ratings
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#damage-chart-tab" role="tablist">
+                          Hard Scape Damage
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#building-chart-tab" role="tablist">
+                          Near Building
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#power-line-chart-tab" role="tablist">
+                          Near Power Line
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="species-chart-tab">
+                        <div id="species-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                      <div class="tab-pane" id="diameter-chart-tab">
+                        <div id="diameter-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                      <div class="tab-pane" id="rating-chart-tab">
+                        <div id="rating-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                      <div class="tab-pane" id="damage-chart-tab">
+                        <div id="damage-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                      <div class="tab-pane" id="building-chart-tab">
+                        <div id="building-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                      <div class="tab-pane" id="power-line-chart-tab">
+                        <div id="powerLine-chart" style="width: 100%; height: 480px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane estimates-tab" id="site-asset-estimates-tab">
+                <div class="row">
+                  <div class="col-md-4 pr-0 border-right">
+                    <ul class="nav nav-pills nav-pills-rose flex-column border-bottom-0 pl-0 pr-0" role="tablist">
+                      <ng-container *ngFor="let status of estimateStatus; index as i; first as isFirst">
+                        <li class="nav-item">
+                          <a class="nav-link" [class.active]="isFirst" data-toggle="tab" href="#site-asset-link{{i}}"
+                            role="tablist" (click)="onChangeEstimateStatus(status)">
+                            {{ status?.Estimate_Status }} - ({{ status?.Estimate_Status_Count }})
+                          </a>
+                        </li>
+                      </ng-container>
+                    </ul>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="tab-content">
+                      <ng-container *ngFor="let status of estimateStatus; index as i; first as isFirst">
+                        <div class="tab-pane" [class.active]="isFirst" id="site-asset-link{{i}}">
+                          <div class="row">
+                            <ng-container *ngIf="estimates?.length > 0">
+                              <cdk-virtual-scroll-viewport class="site-estimate-list-viewport"
+                                [itemSize]="estimateItemSize" [maxBufferPx]="estimateItemMaxBufferPx"
+                                [minBufferPx]="estimateItemMinBufferPx">
+                                <div *cdkVirtualFor="let estimate of estimates" class="site-estimate-item col-12">
+                                  <app-customer-site-estimate [estimate]="estimate"> </app-customer-site-estimate>
+                                </div>
+                              </cdk-virtual-scroll-viewport>
+                            </ng-container>
+                            <ng-container *ngIf="!estimates || estimates.length === 0">
+                              <div class="col-12 text-center">
+                                <p> No available data </p>
+                              </div>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template cdk-portal #treeImgPortal="cdkPortal">
+  <app-tree-image-viewer [src]="curBigImgUrl" (loadFail)="onLoadImgFail()"></app-tree-image-viewer>
+</ng-template>

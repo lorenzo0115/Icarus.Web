@@ -1,0 +1,30 @@
+.company-site-card .card-body {
+  min-height: 216px !important;
+}
+
+.company-site-card .card-body .site-manager-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.company-site-card .card-body .manager-name {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 16px !important;
+  margin-bottom: 0px !important;
+}
+
+.company-site-card .card-body .tab-pane p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.company-site-card .card-body .tab-group ul {
+  border-bottom: #908888 solid 1px;
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.company-site-card .card-body .tab-group ul a.nav-link {
+  border-radius: 15px 15px 0px 0px !important;
+}

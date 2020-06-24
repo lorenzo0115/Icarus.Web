@@ -1,0 +1,23 @@
+<agm-map #siteMap class="customer-site-map" [mapTypeId]="type" [streetViewControl]="false" [fullscreenControl]="true"
+  (mapReady)="onMapReady($event)">
+  <button mat-raised-button id="refresh-site-map" class="btn btn-warning btn-round btn-fab m-2"
+    (click)="onRecenterMap()">
+    <i class="material-icons">refresh</i>
+  </button>
+  <agm-marker *ngFor="let site of sites" [latitude]="site?.Latitude" [longitude]="site?.Longitude"
+    [markerDraggable]="false" [animation]="site.animation" [iconUrl]="site | mapMarker: 'site'"
+    (markerClick)=" onSelectMarker(site)">
+    <agm-info-window *ngIf="site.ViewWindow" [isOpen]="true">
+      <p class="customer-site-map-txt mb-1"> {{ site?.Site }} </p>
+      <p class="customer-site-map-txt mb-1"> {{ site?.Street }} </p>
+      <span class="customer-site-map-txt mb-1"> {{ site?.City }} - </span>
+      <span class="customer-site-map-txt mb-1"> {{ site?.Zipcode }} </span> <br />
+      <p class="customer-site-map-txt mb-1"> {{ site?.County || 'Unknown County' }} </p>
+      <a href="#" class="float-right d-flex align-items-center" style="cursor: pointer;"
+        (click)="onViewDetail($event, site)">
+        <span class="text-warning">Detail</span>
+        <i class="material-icons text-warning">keyboard_arrow_right</i>
+      </a>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

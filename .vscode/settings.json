@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b2065a9e-fb11-4248-93de-c992b70f6ce9/resourceGroups/Sparrow/providers/Microsoft.Web/sites/sparrowassetmanager",
+    "appService.deploySubpath": "dist"
+}

@@ -1,0 +1,21 @@
+.other-service-chart .card-header {
+  background-color: gray !important;
+}
+
+.other-service-chart .card-header button {
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+.other-service-chart .description {
+  text-indent: 24px !important;
+}
+
+.other-service-chart .description span {
+  color: black !important;
+}
+
+.other-service-chart .description .value-span {
+  color: darkgreen !important;
+}

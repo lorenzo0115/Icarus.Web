@@ -1,0 +1,26 @@
+.company-node {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.client-node {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.client-node:hover {
+  background-color: #eeeeee;
+}
+
+.customer-site-list-card .site-cdk-viewport {
+  height: 370px;
+  width: 100%;
+}
+
+.customer-site-list-card .site-cdk-item {
+  height: 270px;
+}
+
+.site-map {
+  height: 415px !important;
+}

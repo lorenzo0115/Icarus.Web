@@ -1,0 +1,21 @@
+.company-site-list .card-header span {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.company-site-list .mat-form-field:nth-child(2) {
+  padding-top: 4px !important;
+}
+
+.company-site-list .card-body {
+  height: 700px;
+}
+
+.company-site-list .site-cdk-viewport {
+  height: 680px;
+  width: 100%;
+}
+
+.company-site-list .site-cdk-item {
+  height: 288px;
+}

@@ -1,0 +1,25 @@
+<agm-map #treeMap class="tree-map" [mapTypeId]="type" [streetViewControl]="false" [fullscreenControl]="true"
+  (mapReady)="onMapReady($event)">
+  <button mat-raised-button id="refresh-map" class="btn btn-warning btn-round btn-fab m-2"
+    [matTooltipPosition]="'right'" matTooltip="Recenter Map" (click)="onRecenterMap()">
+    <i class="material-icons">refresh</i>
+  </button>
+  <agm-marker *ngFor="let tree of trees" [latitude]="tree.Latitude" [longitude]="tree.Longitude"
+    [animation]="tree.animation" [opacity]="tree.alpha" [markerDraggable]="false"
+    [iconUrl]="tree | mapMarker: 'tree' : isShowCompletedTree" (markerClick)="onSelectMarker(tree)">
+    <agm-info-window *ngIf="tree.ViewWindow" [isOpen]="true">
+      <div class="d-flex justify-content-center">
+        <img [src]="tree?.Images && tree.Images[0].Image_URL" style="width: 100px; cursor: pointer;" alt="tree-img"
+          (click)="onViewImg(tree)" />
+      </div>
+      <div class="d-flex justify-content-center mt-1">
+        <button mat-raised-button class="btn btn-success btn-sm btn-round map-info-btn"
+          (click)="onOpenInfoWindow(tree)">
+          {{ tree.Common_Name }}
+        </button>
+      </div>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+
+<app-tree-dialog></app-tree-dialog>

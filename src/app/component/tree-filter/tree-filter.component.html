@@ -1,0 +1,124 @@
+<div class="row">
+  <button *ngIf="isShowClearBtn" mat-raised-button class="btn btn-rose btn-round btn-fab m-2 clear-btn"
+    [matTooltipPosition]="'above'" matTooltip="Clear Filter">
+    <i class="material-icons">restore</i>
+  </button>
+  <div class="col-12 tree-summary">
+    <ul class="nav nav-pills nav-pills-warning d-flex flex-nowrap" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#inventory-tab" role="tablist">
+          Inventory
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#filter-tab" role="tablist">
+          Filters
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content tab-space">
+      <div class="tab-pane active tree-species" id="inventory-tab">
+        <mat-selection-list>
+          <mat-list-option *ngFor="let record of Tree_Types; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.TreeTypeID, 'TreeTypeID')">
+            <span matLine>
+              <span [style.color]="record.Color">
+                <i class="fa fa-trees fa-2x"></i>
+              </span>
+              <span>
+                {{ record.Common_Name }}
+              </span>
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+            <span matLine>
+              <i>{{record.Botanical_Name}}</i>
+            </span>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div class="tab-pane" id="filter-tab">
+        <mat-selection-list>
+          <h3 matSubheader>Electricity</h3>
+          <mat-list-option *ngFor="let record of Near_Powerline_Options; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.Near_Powerline, 'Near_Powerline')">
+            <span matLine>
+              <span>
+                <i class="{{record.Class}}"></i>
+              </span>
+              {{ record.Text }}
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+        <mat-selection-list>
+          <h3 matSubheader>Structure</h3>
+          <mat-list-option *ngFor="let record of Near_Building_Options; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.Near_Building, 'Near_Building')">
+            <span matLine>
+              <span>
+                <i class="{{record.Class}}"></i>
+              </span>
+              {{ record.Text }}
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+        <mat-selection-list>
+          <h3 matSubheader>Hardscape Damage</h3>
+          <mat-list-option *ngFor="let record of HardscapeDamage_Options; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.HardscapeDamageTypeID, 'HardscapeDamageTypeID')">
+            <span matLine>
+              <span>
+                <i class="{{record.Class}}"></i>
+              </span>
+              {{ record.Text }}
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+        <mat-selection-list>
+          <h3 matSubheader>Ratings</h3>
+          <mat-list-option *ngFor="let record of Tree_Rating; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.TreeRatingID, 'TreeRatingID')">
+            <span matLine>
+              <span>
+                <i class="{{record.Class}}"></i>
+              </span>
+              {{ record.Text }}
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+        <mat-selection-list>
+          <h3 matSubheader>Diameter Breast Height</h3>
+          <mat-list-option *ngFor="let record of Diameter_Breast_Height; index as i" [value]="record.Value"
+            (click)="Filter_Selected(record, SearchSiteTrees.DiameterBreastHeightID, 'DiameterBreastHeightID')">
+            <span matLine>
+              <span>
+                <i class="{{record.Class}}"></i>
+              </span>
+              {{ record.Text }}
+              <small class="text-info">
+                {{ record.Count }}
+              </small>
+            </span>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </div>
+  </div>
+</div>

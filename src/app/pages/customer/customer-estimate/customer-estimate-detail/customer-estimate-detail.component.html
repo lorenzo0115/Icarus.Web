@@ -1,0 +1,103 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-customer-estimate-header [estimate]="estimate" (approve)="onApprove($event)">
+        </app-customer-estimate-header>
+        <app-customer-estimate-site-header [site]="site" [treeCount]="totalTreeCount">
+        </app-customer-estimate-site-header>
+      </div>
+      <div class="col-12">
+        <div class="card mt-2 mb-2 estimate-card">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pills-warning d-flex align-items-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#estimate-detail-summary-tab" role="tablist">
+                  Summary
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#estimate-detail-trees-tab" role="tablist"
+                  (click)="onShowTreesTab()">
+                  Trees
+                </a>
+              </li>
+              <li *ngIf="estimate?.Note" class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#estimate-note-tab" role="tablist">
+                  Note
+                </a>
+              </li>
+              <div class="ml-auto mr-2" *ngIf="estimate?.Estimate_Status === 'In Progress'">
+                <p class="font-weight-bold m-0"> {{ completedTreeCount }}/{{ totalTreeCount }} Trees Remaining </p>
+                <p class="font-weight-bold m-0"> {{ treeCompletedPercent / 100 | percent }} Completed </p>
+                <mat-progress-bar mode="determinate" value="{{treeCompletedPercent}}" class="mb-1"></mat-progress-bar>
+              </div>
+              <div [class.ml-auto]="estimate?.Estimate_Status !== 'In Progress'">
+                <button mat-raised-button class="btn btn-warning btn-round btn-fab" matTooltipPosition="above"
+                  matTooltip="Download PDF" (click)="onDownloadPdf()">
+                  <i class="material-icons">vertical_align_bottom</i>
+                </button>
+              </div>
+            </ul>
+            <div class="tab-content tab-space">
+              <div class="tab-pane active" id="estimate-detail-summary-tab">
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <div id="asset-chart" style="width: 100%; height: 320px"></div>
+                    <app-customer-estimate-item-list [type]="'asset'" [list]="assets" [genericColor]="true">
+                    </app-customer-estimate-item-list>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div id="service-chart" style="width: 100%; height: 320px"></div>
+                    <app-customer-estimate-item-list [type]="'service'" [list]="services" [genericColor]="false">
+                    </app-customer-estimate-item-list>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div id="other-service-chart" style="width: 100%; height: 320px"></div>
+                    <app-customer-estimate-item-list [type]="'otherService'" [list]="otherServices"
+                      [genericColor]="false">
+                    </app-customer-estimate-item-list>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="estimate-detail-trees-tab">
+                <div class="row trees-tab">
+                  <div class="col-12 col-md-6">
+                    <cdk-virtual-scroll-viewport [style.height.px]="624" [itemSize]="assetScrollItemPx"
+                      [maxBufferPx]="assetScrollItemMaxBuffPx" [minBufferPx]="assetScrollItemMinBuffPx">
+                      <div class="mr-2 ml-2" [style.height.px]="384"
+                        *cdkVirtualFor="let tree of estimate?.Assets; trackBy: trackByFn">
+                        <app-tree-card [id]="tree.Asset_ID" [tree]="tree" [category]="'estimate'"
+                          (previewImg)="onShowTreeFullImg($event)" (locate)="onLocateTreeInMap($event)">
+                        </app-tree-card>
+                      </div>
+                    </cdk-virtual-scroll-viewport>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <app-tree-map #treeMap [trees]="estimate?.Assets" [lat]="estimate?.Latitude"
+                      [lng]="estimate?.Longitude" [isShowCompletedTree]="true" [isHoverEnable]="false"
+                      (previewImg)="onShowTreeFullImg($event)">
+                    </app-tree-map>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="estimate?.Note" class="tab-pane" id="estimate-note-tab">
+                <div class="row">
+                  <div class="col-12 estimate-note" [innerHtml]="estimate?.Note"> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template cdk-portal #treeImgPortal="cdkPortal">
+  <app-tree-image-viewer [src]="curBigImgUrl" (loadFail)="onLoadImgFail()"></app-tree-image-viewer>
+</ng-template>
+
+<ng-template cdk-portal #pdfPortal="cdkPortal">
+  <app-pdf-viewer [pdfPath]="pdfPath"></app-pdf-viewer>
+</ng-template>

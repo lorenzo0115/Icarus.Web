@@ -1,0 +1,52 @@
+<div class="card estimate-detail-card">
+  <div class="card-header">
+    <h4 class="card-title">{{ estimate.Name }}</h4>
+    <p class="card-category">{{ estimate.Company }} (#{{ estimate?.EstimateCode }})</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Client:</p>
+        <p class="ml-2">{{ estimate?.Client_Name }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Site:</p>
+        <p class="ml-2">{{ estimate?.Site }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Status:</p>
+        <p class="ml-2">{{ estimate?.Estimate_Status }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Status Date:</p>
+        <p class="ml-2">{{ estimate?.Estimate_Status_Date | dateMask }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Asset Count:</p>
+        <p class="ml-2">{{ estimate?.AssetCount || 0 }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Asset Services:</p>
+        <p class="ml-2">{{ estimate?.Service_Count || 0 }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Other Services:</p>
+        <p class="ml-2">{{ estimate?.Other_Service_Count || 0 }}</p>
+      </div>
+      <div class="col d-flex justify-content-start">
+        <p class="font-weight-bold">Grand Total:</p>
+        <p class="ml-2">{{ estimate?.Services_Total + estimate?.Other_Services_Total | currency }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button mat-raised-button class="btn btn-success btn-round ml-2 mr-2" (click)="onView()">
+          <i class="material-icons">double_arrow</i>
+          View
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

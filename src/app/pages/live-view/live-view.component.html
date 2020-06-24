@@ -1,0 +1,106 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <ng-container *ngIf="isRequestDone && !isCodeInvalid">
+      <div class="row">
+        <div class="col-12 text-center">
+          <app-live-view-header [estimate]="estimate" [code]="estimateCode"></app-live-view-header>
+        </div>
+        <div class="col-12 text-center">
+          <app-live-view-site-header [site]="site"></app-live-view-site-header>
+        </div>
+        <div class="col-12">
+          <div class="card mt-1 mb-2">
+            <div class="card-body live-view-card">
+              <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#tree-tab" role="tablist">
+                    Trees
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#summary-tab" role="tablist">
+                    Summary
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#summary-tab" role="tablist">
+                    Summary
+                  </a>
+                </li>
+                <li *ngIf="estimate?.Note" class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#note-tab" role="tablist">
+                    Note
+                  </a>
+                </li>
+                <button mat-raised-button class="btn btn-warning btn-round btn-fab ml-auto" matTooltipPosition="above"
+                  matTooltip="Download PDF" (click)="onDownloadPdf()">
+                  <i class="material-icons">vertical_align_bottom</i>
+                </button>
+              </ul>
+              <div class="tab-content tab-space">
+                <div class="tab-pane active" id="tree-tab">
+                  <div class="row tree-tab">
+                    <div class="col-6">
+                      <cdk-virtual-scroll-viewport [style.height.px]="624" [itemSize]="assetScrollItemPx"
+                        [maxBufferPx]="assetScrollItemMaxBuffPx" [minBufferPx]="assetScrollItemMinBuffPx">
+                        <div class="mr-2 ml-2" [style.height.px]="384"
+                          *cdkVirtualFor="let tree of estimate?.Assets; trackBy: trackByFn">
+                          <app-tree-card [id]="tree.Asset_ID" [tree]="tree" [category]="'estimate'"
+                            (previewImg)="onShowTreeFullImg($event)" (locate)="onLocateTreeInMap($event)">
+                          </app-tree-card>
+                        </div>
+                      </cdk-virtual-scroll-viewport>
+                    </div>
+                    <div class="col-6">
+                      <app-tree-map #treeMap [trees]="estimate?.Assets" [lat]="estimate?.Latitude"
+                        [lng]="estimate?.Longitude" [isShowCompletedTree]="true" [isHoverEnable]="false"
+                        (previewImg)="onShowTreeFullImg($event)">
+                      </app-tree-map>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="summary-tab">
+                  <div class="row">
+                    <div class="col-4">
+                      <app-liv-view-asset-chart [assets]="assets"></app-liv-view-asset-chart>
+                    </div>
+                    <div class="col-4">
+                      <app-liv-view-service-chart [services]="services"></app-liv-view-service-chart>
+                    </div>
+                    <div class="col-4">
+                      <app-liv-view-other-service-chart [otherServices]="otherServices">
+                      </app-liv-view-other-service-chart>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="estimate?.Note" class="tab-pane" id="note-tab">
+                  <div class="row">
+                    <div class="col-12" [innerHtml]="estimate?.Note"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isRequestDone && isCodeInvalid">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4> Access Denied - Invalid Code </h4>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template cdk-portal #treeImgPortal="cdkPortal">
+  <app-tree-image-viewer [src]="curBigImgUrl" (loadFail)="onLoadImgFail()"></app-tree-image-viewer>
+</ng-template>
+
+<ng-template cdk-portal #pdfPortal="cdkPortal">
+  <app-pdf-viewer [pdfPath]="pdfPath"></app-pdf-viewer>
+</ng-template>
+
+<ngx-spinner></ngx-spinner>

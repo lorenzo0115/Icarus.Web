@@ -1,0 +1,30 @@
+.customer-site-card {
+  max-height: 270px;
+  height: 270px;
+}
+
+.customer-site-card .profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.customer-site-card .manager-name {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0px !important;
+}
+
+.customer-site-card .asset-count {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.customer-site-card ul {
+  border-bottom: #908888 solid 1px;
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.customer-site-card ul a.nav-link {
+  border-radius: 15px 15px 0px 0px !important;
+}

@@ -1,0 +1,45 @@
+<div id="asset-chart" style="width: 100%; height: 320px"></div>
+
+<div class="card asset-chart">
+  <div class="card-header p-0">
+    <h2 class="mb-0">
+      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#asset-collapse"
+        aria-expanded="true" aria-controls="asset-collapse">
+        Assets
+      </button>
+    </h2>
+  </div>
+
+  <div id="asset-collapse" class="collapse show">
+    <div class="card-body">
+      <ng-container *ngIf="assets?.length > 0">
+        <div class="row my-2" style="font-weight: 700; color: darkgreen;">
+          <div class="col d-flex justify-content-end">
+            <span> {{ totalQuantity | number }} Count</span>
+          </div>
+        </div>
+        <ng-container *ngFor="let asset of assets; index as i;">
+          <mat-accordion class="example-headers-align">
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span [style.color]="asset.color" class="mr-2">
+                    <i class="fa fa-circle"></i>
+                  </span>
+                  <span>{{ asset.item }}</span>
+                </mat-panel-title>
+                <mat-panel-description class="d-flex justify-content-end">
+                  <span> {{ asset.quantity | number }} </span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <app-live-view-service-table [services]="asset.services"></app-live-view-service-table>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!assets || assets.length === 0">
+        <p class="m-0 d-flex align-items-center justify-content-center"> No data exists. </p>
+      </ng-container>
+    </div>
+  </div>
+</div>
