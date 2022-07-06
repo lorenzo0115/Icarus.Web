@@ -60,7 +60,7 @@
     "hammerjs": "2.0.8",
     "jasny-bootstrap": "4.0.0",
     "jquery": "^3.5.1",
-    "jquery-validation": "1.19.1",
+    "jquery-validation": "1.19.5",
     "jqvmap": "1.5.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
