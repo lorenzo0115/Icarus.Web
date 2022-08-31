@@ -65,7 +65,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "2.24.0",
-    "moment-timezone": "0.5.27",
+    "moment-timezone": "0.5.35",
     "ng-image-slider": "^2.4.1",
     "ng2-nouislider": "1.8.2",
     "ng2-pdf-viewer": "^6.3.0",
